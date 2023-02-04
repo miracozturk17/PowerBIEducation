@@ -1,0 +1,14 @@
+ZAMANMETIN =
+VAR FARK =         TABLO[SONTARIH] - TABLO[ILKTARIH]
+VAR FARKDAKIKA =   FARK * 24 * 60
+VAR GUN =          IF ( FARK >= 1, INT ( FARK ), BLANK () )
+VAR SAAT =         INT ( ( FARK - GUN ) * 24 )
+VAR DAKIKA =       FARKDAKIKA - ( GUN * 24 * 60 ) - ( SAAT * 60 ) 
+VAR GUNMETIN =     IF ( GUN > 1, FORMAT ( GUN, "00" ) & "g" )
+VAR SAATMETIN =    FORMAT ( SAAT, "00" ) & "sa"
+VAR DAKIKAMETIN =  FORMAT ( DAKIKA, "00" ) & "dk"
+RETURN
+    IF (
+        NOT ( ISBLANK ( TABLO[ILKTARIH] ) ),
+        COMBINEVALUES ( " ", GUNMETIN, SAATMETIN, DAKIKAMETIN )
+       )
